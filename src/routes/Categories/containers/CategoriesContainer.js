@@ -13,10 +13,9 @@ import Categories from '../components/Categories'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapStateToProps = (state) => {
-  console.log('state: ', state)
-  const { categoryReducer } = state
+  const { categoriesReducer } = state
   return {
-    categories: categoryReducer.categories
+    categories: categoriesReducer.categories
   }
 }
 

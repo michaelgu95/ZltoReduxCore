@@ -1,23 +1,23 @@
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-  path : 'categories',
+  path : 'partners/:categoryId',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
         and embed an async module loader (jsonp) when bundling   */
-    require.ensure(['./containers/CategoriesContainer', './modules/categories'], (require) => {
+    require.ensure(['./containers/PartnersContainer', './modules/partners'], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const CategoriesContainer = require('./containers/CategoriesContainer').default
-      const reducer = require('./modules/categories').default
+      const PartnersContainer = require('./containers/PartnersContainer').default
+      const reducer = require('./modules/partners').default
 
-      /*  Add the reducer to the store on key 'categories'  */
-      injectReducer(store, { key: 'categoriesReducer', reducer })
+      /*  Add the reducer to the store on key 'partners'  */
+      injectReducer(store, { key: 'partnersReducer', reducer })
       /*  Return getComponent   */
-      cb(null, CategoriesContainer)
+      cb(null, PartnersContainer)
 
     /* Webpack named bundle   */
-    }, 'categories')
+    }, 'partners')
   }
 })
