@@ -57,7 +57,7 @@ function items(state = initialState, action) {
       return _.assign({}, state, { isFetching: true });
     case RECEIVE_ITEMS:
       const { items } = action.payload
-      return {...state, items: items, isFetching: false}
+      return _.assign({}, state, {items: items}, { isFetching: true });
     default:
       return state;
   }

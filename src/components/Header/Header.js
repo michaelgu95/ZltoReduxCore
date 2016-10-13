@@ -13,6 +13,9 @@ export const Header = () => (
       Categories
     </Link>
     {' · '}
+    <Link to='/impact' activeClassName='route--active'>
+      Impact
+    </Link>
   </div>
 )
 

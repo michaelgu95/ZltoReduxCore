@@ -4,7 +4,7 @@ import functional from 'react-functional'
 
 export const Categories = (props) => (
   <ul style={{ margin: '0 auto' }} >
-    {props.categories.map(cat => <Link to={`/partners/${cat.id}`}><li className='btn btn-default'>{cat.name}{' '}</li></Link>)}
+    {props.categories.map(cat => <Link key={cat.id} to={`/partners/${cat.id}`}><li className='btn btn-default'>{cat.name}{' '}</li></Link>)}
   </ul>
 )
 

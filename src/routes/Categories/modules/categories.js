@@ -57,7 +57,7 @@ function categories(state = initialState, action) {
       return _.assign({}, state, { isFetching: true });
     case RECEIVE_CATEGORIES:
       const { categories } = action.payload
-      return {...state, categories: categories, isFetching: false}
+      return _.assign({}, state, {categories: categories}, {isFetching: false})
     default:
       return state;
   }

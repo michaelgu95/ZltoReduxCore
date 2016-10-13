@@ -4,7 +4,7 @@ import functional from 'react-functional'
 
 export const Items = (props) => (
   <ul style={{ margin: '0 auto' }} >
-    {props.items.map(item => <Link to='/'><li className='btn btn-default'><h1>{item.name}</h1><p>{item.description}</p><p>{item.zlato_amount}</p>{' '}</li></Link>)}
+    {props.items.map(item => <Link to={`/transaction/${item.id}`}><li className='btn btn-default'><h1>{item.name}</h1><p>{`${item.zlato_amount} Zlato`}</p><p>{`${item.count} Available`}</p></li></Link>)}
   </ul>
 )
 
