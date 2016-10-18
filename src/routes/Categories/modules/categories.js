@@ -2,7 +2,7 @@
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash';
 
-const WALLET_URI = 'http://127.0.0.1:8000'
+const WALLET_URI = 'http://127.0.0.1:7000'
 
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';

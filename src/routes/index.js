@@ -4,7 +4,6 @@ import Home from './Home'
 import CategoriesRoute from './Categories'
 import PartnersRoute from './Partners'
 import ItemsRoute from './Items'
-import TransactionRoute from './Transaction'
 import ImpactRoute from './Impact'
 
 
@@ -19,7 +18,6 @@ export const createRoutes = (store) => ({
     CategoriesRoute(store),
     PartnersRoute(store),
     ItemsRoute(store),
-    TransactionRoute(store),
     ImpactRoute(store)
   ]
 })

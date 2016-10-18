@@ -4,7 +4,10 @@ import functional from 'react-functional'
 
 export const Partners = (props) => (
   <ul style={{ margin: '0 auto' }} >
-    {props.partners.map(p => <Link to={`/items/${p.id}`}><li className='btn btn-default'>{p.name}{' '}</li></Link>)}
+    {props.partners.map(p => 
+      <Link to={`/items/${p.id}`}>
+        <li className='btn btn-default'>{p.name}{' '}</li>
+      </Link>)}
   </ul>
 )
 
