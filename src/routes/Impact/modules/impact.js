@@ -14,7 +14,6 @@ export function requestImpact() {
 }
 
 export function receiveImpact(impact) {
-  console.log(impact)
   return {
     type: RECEIVE_IMPACT,
     payload: {

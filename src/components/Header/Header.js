@@ -5,12 +5,12 @@ import './Header.scss'
 export const Header = () => (
   <div>
     <h1>Zlato Mobi Site</h1>
-    <IndexLink to='/' activeClassName='route--active'>
-      Home
-    </IndexLink>
-    {' · '}
     <Link to='/categories' activeClassName='route--active'>
-      Categories
+      Purchase
+    </Link>
+    {' · '}
+    <Link to='/earn' activeClassName='route--active'>
+      Earn
     </Link>
     {' · '}
     <Link to='/impact' activeClassName='route--active'>

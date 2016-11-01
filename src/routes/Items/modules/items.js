@@ -30,12 +30,10 @@ export function requestTransaction() {
   }
 }
 
-export function receiveTransaction(detail) {
+export function receiveTransaction(payload) {
   return {
     type: RECEIVE_TRANSACTION,
-    payload: {
-      detail
-    }
+    payload: payload
   }
 }
 
@@ -57,23 +55,23 @@ export function fetchItems(partnerId) {
   }
 }
 
-export function initiateTransaction(payload) {
+export function initiateTransaction(groupId, userId) {
   return dispatch => {
     dispatch(requestTransaction())
     return fetch(`${WALLET_URI}/user/transact/`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        group_id: groupId,
+        user_id: userId
+      })
     })
-    .then(response => {
-      console.log(response)
-      return response.json()
-    })
+    .then(response => response.json())
     .then(json => {
-      dispatch(receiveTransaction(json.detail))
+      dispatch(receiveTransaction(json))
     })  
   }
 }
@@ -103,8 +101,7 @@ function items(state = initialState, action) {
     case REQUEST_TRANSACTION:
       return _.assign({}, state, { isFetching: true });
     case RECEIVE_TRANSACTION:
-      const { detail } = action.payload
-      return _.assign({}, state, {transactionResponse: detail}, { isFetching: true });
+      return _.assign({}, state, {transactionResponse: action.payload}, { isFetching: true });
     default:
       return state;
   }

@@ -5,7 +5,8 @@ import Items from '../components/Items'
 const mapStateToProps = (state) => {
   const { itemsReducer } = state
   return {
-    items: itemsReducer.items
+    items: itemsReducer.items,
+    transactionResponse: itemsReducer.transactionResponse
   }
 }
 

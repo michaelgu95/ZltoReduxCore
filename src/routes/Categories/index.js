@@ -1,4 +1,12 @@
 import { injectReducer } from '../../store/reducers'
+import { UserAuthWrapper } from 'redux-auth-wrapper'
+import { routerActions } from 'react-router-redux'
+
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.user, // how to get the user state
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+})
 
 export default (store) => ({
   path : 'categories',
@@ -9,7 +17,7 @@ export default (store) => ({
     require.ensure(['./containers/CategoriesContainer', './modules/categories'], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const CategoriesContainer = require('./containers/CategoriesContainer').default
+      const CategoriesContainer = UserIsAuthenticated(require('./containers/CategoriesContainer').default)
       const reducer = require('./modules/categories').default
 
       /*  Add the reducer to the store on key 'categories'  */
