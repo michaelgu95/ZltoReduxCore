@@ -11,8 +11,7 @@ class Login extends Component {
   }
   handleSubmit(values) {
     if (values.idNumber && values.password) {
-      console.log('fields are present')
-      this.props.initiateLogin(values.email, values.password);
+      this.props.initiateLogin(values.idNumber, values.password);
     } else {
       this.setState({error: 'Please enter an email and password.'})
     }
@@ -31,7 +30,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <LoginModal onSubmit={this.handleSubmit} />
+        <LoginModal onSubmit={this.handleSubmit.bind(this)} />
         {this.state.error ? <h3>{this.state.error}</h3> : null}
       </div>
     )

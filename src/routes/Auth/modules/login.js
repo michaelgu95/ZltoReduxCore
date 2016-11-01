@@ -2,7 +2,7 @@
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash';
 
-const AUTH_URI = 'http://127.0.0.1:8000'
+const AUTH_URI = 'http://wallet.zlto.mobi'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
@@ -10,7 +10,7 @@ export const LOGOUT = 'LOGOUT';
 
 export function requestLogin() {
   return {
-    type: REQUEST_USER
+    type: REQUEST_LOGIN
   }
 }
 
@@ -30,7 +30,7 @@ export function logout() {
 export function initiateLogin(idNumber, password) {
   return dispatch => {
     dispatch(requestLogin())
-    return fetch(`${AUTH_URI}/api/api-login/`, {
+    return fetch(`${AUTH_URI}/auth/login/`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -64,6 +64,7 @@ const initialState = {
 }
 
 function login(state = initialState, action) {
+  console.log('action fired: ', action.type)
   switch(action.type) {
     case REQUEST_LOGIN:
       return _.assign({}, state, { isFetchingLogin: true });
