@@ -52,7 +52,7 @@ function mapRadarData(details){
 
 export const Impact = (props) => (
   <RadarChart style={{ margin: '0 auto' }} cx={250} cy={250} outerRadius={200} width={600} height={500} data={mapRadarData(props.impact)} >
-    <Radar name="Mike" dataKey="count" stroke="#8884d8" fill="#8884d8" fillOpacity={0.2}/>
+    <Radar name="Mike" dataKey="count" stroke="#8884d8" fill="#8884d8" fillOpacity={0.5}/>
     <PolarGrid />
     <PolarAngleAxis dataKey="subject" />
     <PolarRadiusAxis/>

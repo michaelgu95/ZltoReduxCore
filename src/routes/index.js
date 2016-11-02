@@ -4,7 +4,9 @@ import Login from './Auth'
 import CategoriesRoute from './Categories'
 import PartnersRoute from './Partners'
 import ItemsRoute from './Items'
+import EarnRoute from './Earn'
 import ImpactRoute from './Impact'
+
 
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -14,11 +16,12 @@ export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
   childRoutes : [
+    Login(store),
     CategoriesRoute(store),
     PartnersRoute(store),
     ItemsRoute(store),
-    ImpactRoute(store), 
-    Login(store)
+    EarnRoute(store), 
+    ImpactRoute(store)
   ]
 })
 

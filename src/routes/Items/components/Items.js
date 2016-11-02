@@ -5,8 +5,6 @@ import Modal from 'boron/DropModal';
 import _ from 'lodash';
 import Spinner from 'react-spinkit';
 
-<Spinner spinnerName='double-bounce' />
-
 const modalStyle = {
     width: 'inherit',
     height: 'inherit'

@@ -11,7 +11,7 @@ class Login extends Component {
   }
   handleSubmit(values) {
     if (values.idNumber && values.password) {
-      this.props.initiateLogin(values.idNumber, values.password);
+      this.props.loginUser(values.idNumber, values.password);
     } else {
       this.setState({error: 'Please enter an email and password.'})
     }
@@ -39,7 +39,7 @@ class Login extends Component {
 
 Login.propTypes = {
   user: React.PropTypes.object,
-  initiateLogin: React.PropTypes.func.isRequired
+  loginUser: React.PropTypes.func.isRequired
 }
 
 export default Login

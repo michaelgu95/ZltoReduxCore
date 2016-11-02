@@ -1,75 +1,126 @@
 //Actions
+import { checkHttpStatus, parseJSON } from '../../../utils'
+import { push } from 'react-router-redux'
+import jwtDecode from 'jwt-decode';
 import fetch from 'isomorphic-fetch'
-import _ from 'lodash';
+import _ from 'lodash'
 
 const AUTH_URI = 'http://wallet.zlto.mobi'
+export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE'
+export const LOGOUT_USER = 'LOGOUT_USER'
 
-export const REQUEST_LOGIN = 'REQUEST_LOGIN';
-export const RECEIVE_LOGIN = 'RECEIVE_LOGIN';
-export const LOGOUT = 'LOGOUT';
-
-export function requestLogin() {
+export function loginUserRequest() {
   return {
-    type: REQUEST_LOGIN
+    type: LOGIN_USER_REQUEST
   }
 }
 
-export function receiveLogin(user) {
+export function loginUserSuccess(token) {
+  localStorage.setItem('token', token)
   return {
-    type: RECEIVE_LOGIN,
-    user
-  };
+    type: LOGIN_USER_SUCCESS,
+    payload: {
+      token: token
+    }
+  }
+}
+
+export function loginUserFailure(error) {
+  localStorage.removeItem('token')
+  return {
+    type: LOGIN_USER_FAILURE,
+    payload: {
+      status: error.response.status,
+      statusText: error.response.statusText
+    }
+  }
 }
 
 export function logout() {
+  localStorage.removeItem('token')
   return {
-    type: LOGOUT
-  };
+      type: LOGOUT_USER
+  }
 }
 
-export function initiateLogin(idNumber, password) {
-  return dispatch => {
-    dispatch(requestLogin())
+export function loginUser(idNumber, password, redirect="/") {
+  return function(dispatch) {
+    dispatch(loginUserRequest())
     return fetch(`${AUTH_URI}/auth/login/`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        id_number: idNumber,
-        password: password
+        body: JSON.stringify({id_number: idNumber, password: password})
       })
-    })
-    .then(response => {
-      console.log(response)
-      return response.json()
-    })
-    .then(json => {
-      dispatch(receiveLogin(json))
-    });  
+      .then(checkHttpStatus)
+      .then(parseJSON)
+      .then(response => {
+        console.log(response)
+        try {
+          let decoded = jwtDecode(response.token)
+          dispatch(loginUserSuccess(response.token))
+          dispatch(push(redirect))
+        } catch (e) {
+          dispatch(loginUserFailure({
+              response: {
+                  status: 403,
+                  statusText: 'Invalid token'
+              }
+          }))
+        }
+      })
+      .catch(error => {
+          dispatch(loginUserFailure(error))
+      })
   }
-}
-
-export const actions = {  
-  requestLogin,
-  receiveLogin,
-  initiateLogin,
-  logout
 }
 
 //Reducer
 const initialState = {
-  user: {}
+  token: null,
+  userId: null,
+  isAuthenticated: false,
+  isAuthenticating: false,
+  statusText: null
 }
 
 function login(state = initialState, action) {
-  console.log('action fired: ', action.type)
+  console.log(`action fired: ${action.type} with payload: ${action.payload}`)
+  const { payload } = action
   switch(action.type) {
-    case REQUEST_LOGIN:
-      return _.assign({}, state, { isFetchingLogin: true });
-    case RECEIVE_LOGIN:
-      return _.assign({}, state, { user: action.user });
+    case LOGIN_USER_REQUEST:
+      return _.assign({}, state, {
+        isAuthenticating: true, 
+        'statusText': null 
+      });
+    case LOGIN_USER_SUCCESS:
+      return _.assign({}, state, {
+         'isAuthenticating': false,
+        'isAuthenticated': true,
+        'token': payload.token,
+        'userId': jwtDecode(payload.token).user_id,
+        'statusText': 'You have been successfully logged in.'
+      });
+    case LOGIN_USER_FAILURE:
+      return _.assign({}, state, {
+        'isAuthenticating': false,
+        'isAuthenticated': false,
+        'token': null,
+        'userId': null,
+        'statusText': `Authentication Error: ${payload.status} ${payload.statusText}`
+      });
+    case LOGOUT_USER:
+      return Object.assign({}, state, {
+        'isAuthenticated': false,
+        'token': null,
+        'userId': null,
+        'statusText': 'You have been successfully logged out.'
+      });
     default:
       return state;
   }
