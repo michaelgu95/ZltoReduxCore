@@ -25,7 +25,8 @@ $ npm start                     # Compile and launch
 ## Making Changes
 
 When developing a new feature or page, you should follow these general steps:
-1. Creating a new Route folder for the page
+
+1.  Creating a new Route folder for the page
 2. Register the route under `src/routes/index.js`, passing in the store under `ChildRoutes`
 3. Create your action constants, action creators, and reducers within the modules folder of your route 
 4. Under `/containers`, create your Higher Level Component (HOC) that will provide props and actions to your view
