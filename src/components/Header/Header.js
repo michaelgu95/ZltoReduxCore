@@ -9,12 +9,12 @@ export const Header = () => (
       Purchase
     </Link>
     {' · '}
-    <Link to='/earn' activeClassName='route--active'>
-      Earn
+     <Link to='/impact' activeClassName='route--active'>
+      Home
     </Link>
     {' · '}
-    <Link to='/impact' activeClassName='route--active'>
-      Impact
+    <Link to='/earn' activeClassName='route--active'>
+      Earn
     </Link>
   </div>
 )

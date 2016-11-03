@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import userReducer from './userReducer'
+import userReducer from '../routes/Auth/modules/login'
 import { reducer as formReducer } from 'redux-form'
 import { routerReducer } from 'react-router-redux'
 

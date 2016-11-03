@@ -1,14 +1,9 @@
 import { injectReducer } from '../../store/reducers'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { routerActions } from 'react-router-redux'
+import { requireAuthentication } from '../../utils'
 // import Spinner from '../../components/Spinner'
 
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user, // how to get the user state
-  redirectAction: routerActions.replace,
-  // LoadingComponent: <Spinner spinnerName='circle'></Spinner>,
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
-})
 
 export default (store) => ({
   path : 'earn',
@@ -19,7 +14,7 @@ export default (store) => ({
     require.ensure(['./containers/EarnContainer', './modules/earn'], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const EarnContainer = require('./containers/EarnContainer').default
+      const EarnContainer = requireAuthentication(require('./containers/EarnContainer').default)
       const reducer = require('./modules/earn').default
 
       /*  Add the reducer to the store on key 'earn'  */

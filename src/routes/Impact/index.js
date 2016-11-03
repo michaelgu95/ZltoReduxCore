@@ -1,10 +1,6 @@
 import { injectReducer } from '../../store/reducers'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user, // how to get the user state
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
-})
+import { requireAuthentication } from '../../utils'
 
 export default (store) => ({
   path : 'impact',
@@ -15,7 +11,7 @@ export default (store) => ({
     require.ensure(['./containers/ImpactContainer', './modules/impact'], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const ImpactContainer = UserIsAuthenticated(require('./containers/ImpactContainer').default)
+      const ImpactContainer = requireAuthentication(require('./containers/ImpactContainer').default)
       const reducer = require('./modules/impact').default
 
       /*  Add the reducer to the store on key 'impact'  */

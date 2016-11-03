@@ -5,7 +5,11 @@ import Login from '../components/Login'
 const mapStateToProps = (state) => {
   const { authReducer } = state
   return {
-    userId: authReducer.userId
+    token: authReducer.token,
+    userId: authReducer.userId,
+    // isAuthenticated: authReducer.isAuthenticated,
+    // isAuthenticating: authReducer.isAuthenticating,
+    statusText: authReducer.statusText
   }
 }
 
