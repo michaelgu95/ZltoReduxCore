@@ -25,21 +25,20 @@ $ npm start                     # Compile and launch
 ## Steps for Development
 
 When developing a new feature or page, you should follow these general steps:
-1. Creating a new Route folder for the page
-2. Register the route under `src/routes/index.js`, passing in the store under `ChildRoutes`
-3. Create your action constants, action creators, and reducers within the modules folder of your route 
-4. Under `/containers`, create your Higher Level Component (HOC) that will provide props and actions to your view
-5. Under `/components`, create your Page Level Component, which can either be standalone or composed of smaller, dumb components
-6. Create an index.js file for your route folder. This allows webpack to correctly grab your container and reducer when your route is hit. This follows the Fractal folder structure, which is a lower level optimization of webpack that only requires your route's files when the route is hit. 
+
+1.  Creating a new Route folder for the page
+2.  Register the route under `src/routes/index.js`, passing in the store under `ChildRoutes`
+3.  Create your action constants, action creators, and reducers within the modules folder of your route 
+4.  Under `/containers`, create your Higher Level Component (HOC) that will provide props and actions to your view
+5.  Under `/components`, create your Page Level Component, which can either be standalone or composed of smaller, dumb components
+6.  Create an index.js file for your route folder. This allows webpack to correctly grab your container and reducer when your route is hit. This follows the Fractal folder structure, which is a lower level optimization of webpack that only requires your route's files when the route is hit. 
 
 ## Development Best Practices
-
-`src/store` is where the store, reducer, hot module reload are configured
-`main.js` is where everything comes together and finally rendered to the DOM
-`components` and `containers` is intended for reusable modules shared across routes
-All async actions should be defined in your `src/{your route}/modules/` folder. 
-Use react-router's push function to direct users after an AJAX call finishes.
-
+*  `src/store` is where the store, reducer, hot module reload are configured
+*  `main.js` is where everything comes together and finally rendered to the DOM
+*  `components` and `containers` is intended for reusable modules shared across routes
+*  All async actions should be defined in your `src/{your route}/modules/` folder. 
+*  Use react-router's push function to direct users after an AJAX call finishes.
 
 ## Scripts
 While developing, you will probably rely mostly on `npm start`; however, there are additional scripts at your disposal:
