@@ -35,9 +35,9 @@ When developing a new feature or page, you should follow these general steps:
 
 ## Other tips
 
-`src/store` is where the store, reducer, hot module reload are configured
-`main.js` is where everything comes together and finally rendered to the DOM
-`components` and `containers` is intended for reusable modules shared across routes
+* `src/store` is where the store, reducer, hot module reload are configured
+* `main.js` is where everything comes together and finally rendered to the DOM
+* `components` and `containers` is intended for reusable modules shared across routes
 
 While developing, you will probably rely mostly on `npm start`; however, there are additional scripts at your disposal:
 
