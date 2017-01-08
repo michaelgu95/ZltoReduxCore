@@ -1,5 +1,5 @@
 # ZltoReduxCore
-Redux architectural core for Zlto Mobile Wallet App (zlto.co)
+React+Redux core for Zlto Mobile Wallet App (zlto.co). Refactored for easy integration in Zlto's various frontend implementations: single page dashboard, mobile web, Android, iOS.
 
 ## Features
 * [react](https://github.com/facebook/react)
